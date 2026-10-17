@@ -1,75 +1,68 @@
 import React from 'react';
-import { Zap, Mail, Phone, MapPin, Globe, Share2 } from 'lucide-react';
-import './Footer.css';
+import { Link } from 'react-router-dom';
+import { CATS } from '../data/electricData';
+import logoImg from '../assets/Logo.jpeg';
 
-const Footer = () => {
+export default function Footer() {
   return (
-    <footer className="footer" id="contact">
-      <div className="container">
-        <div className="footer-grid">
-          <div className="footer-about">
-            <div className="logo-container mb-4">
-              <Zap className="logo-icon text-gradient" size={28} />
-              <h2 className="logo-text" style={{fontSize: '1.25rem'}}>
-                Noor<span className="text-gradient">Electric</span>
-              </h2>
+    <footer>
+      <div className="w">
+        <div className="g">
+          <div>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '12px', marginBottom: '14px' }}>
+              <img
+                src={logoImg}
+                alt="Noor Electric Logo"
+                style={{
+                  width: '52px',
+                  height: '52px',
+                  borderRadius: '50%',
+                  objectFit: 'cover',
+                  border: '2px solid var(--yel)',
+                  display: 'block'
+                }}
+              />
+              <div>
+                <h4 style={{ margin: 0 }}>NOOR ELECTRIC</h4>
+                <small style={{ color: 'var(--yel)', fontWeight: 600 }}>Tankaria</small>
+              </div>
             </div>
-            <p className="footer-desc">
-              Your trusted partner for all electrical needs. We provide high-quality, reliable, and energy-efficient products for modern homes and businesses.
+            <p>
+              All Electrical Items Under One Roof.<br />
+              Quality Products, Best Service.
             </p>
-            <div className="social-links">
-              <a href="#" className="social-icon"><Globe size={20} /></a>
-              <a href="#" className="social-icon"><Share2 size={20} /></a>
-              <a href="#" className="social-icon"><Mail size={20} /></a>
+          </div>
+
+          <div>
+            <h4>Pages</h4>
+            <Link to="/">Home</Link>
+            <Link to="/about">About Us</Link>
+            <Link to="/products">Products</Link>
+            <Link to="/gallery">Gallery</Link>
+            <Link to="/contact">Contact Us</Link>
+          </div>
+
+          <div>
+            <h4>Categories</h4>
+            <div id="fc">
+              {CATS.map((c, i) => (
+                <Link key={i} to={`/products?category=${i}`}>
+                  {c[0]}
+                </Link>
+              ))}
             </div>
           </div>
 
-          <div className="footer-links-group">
-            <h3>Quick Links</h3>
-            <ul>
-              <li><a href="#home">Home</a></li>
-              <li><a href="#products">Products Catalog</a></li>
-              <li><a href="#about">About Us</a></li>
-              <li><a href="#contact">Contact</a></li>
-            </ul>
-          </div>
-
-          <div className="footer-links-group">
-            <h3>Categories</h3>
-            <ul>
-              <li><a href="#">Ceiling Fans</a></li>
-              <li><a href="#">LED Lighting</a></li>
-              <li><a href="#">Switches & Sockets</a></li>
-              <li><a href="#">Wires & Cables</a></li>
-            </ul>
-          </div>
-
-          <div className="footer-contact">
-            <h3>Contact Us</h3>
-            <ul className="contact-info">
-              <li>
-                <MapPin size={18} className="contact-icon" />
-                <span>Shop No. 12, Main Market Road, City Center</span>
-              </li>
-              <li>
-                <Phone size={18} className="contact-icon" />
-                <span>+91 98765 43210</span>
-              </li>
-              <li>
-                <Mail size={18} className="contact-icon" />
-                <span>info@noorelectric.com</span>
-              </li>
-            </ul>
+          <div>
+            <h4>Visit us</h4>
+            <p>Miyaji Shopping, Ta. &amp; Dist. Bharuch, Tankaria – 392240</p>
+            <a href="tel:+917698195687">Shafi Ipli: 7698195687</a>
+            <a href="tel:+918140238599">Salman Ipli: 8140238599</a>
           </div>
         </div>
 
-        <div className="footer-bottom">
-          <p>&copy; {new Date().getFullYear()} Noor Electric. All rights reserved.</p>
-          <p className="built-with">Built with ❤️ for modern shops</p>
-        </div>
+        <div className="cp">© 2026 Noor Electric. All rights reserved.</div>
       </div>
     </footer>
   );
-};
-
-export default Footer;
+}
