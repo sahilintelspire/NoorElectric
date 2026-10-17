@@ -14,12 +14,28 @@ export default function LightboxModal({ item, onClose }) {
 
   if (!item) return null;
 
-  const catIndex = item[1];
+  const [type, catIndex, imgUrl, title] = item;
 
   return (
     <div id="lb" className="on" onClick={onClose}>
-      <div style={{ background: `linear-gradient(135deg, ${CC[catIndex]}, #071433)` }}>
-        {IC[catIndex]}
+      <div
+        style={{
+          background: `linear-gradient(135deg, ${CC[catIndex] || '#1A3F96'}, #071433)`,
+          overflow: 'hidden',
+          display: 'grid',
+          placeItems: 'center',
+          padding: imgUrl ? '0' : '20px',
+        }}
+      >
+        {imgUrl ? (
+          <img
+            src={imgUrl}
+            alt={title || type}
+            style={{ width: '100%', height: '100%', objectFit: 'contain', borderRadius: '24px' }}
+          />
+        ) : (
+          IC[catIndex]
+        )}
       </div>
     </div>
   );

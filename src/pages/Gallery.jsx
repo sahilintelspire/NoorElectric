@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import PageBanner from '../components/PageBanner';
 import CtaSection from '../components/CtaSection';
 import { IC, CATS, CC, GI as defaultGi } from '../data/electricData';
-import { fetchGallery } from '../services/api';
+import { fetchGallery, getStorageUrl } from '../services/api';
 
 export default function Gallery({ onSelectGalleryItem }) {
   const [gc, setGc] = useState('All');
@@ -16,6 +16,8 @@ export default function Gallery({ onSelectGalleryItem }) {
           liveItems.map((g, idx) => [
             g.category_type || 'Our Shop',
             g.category_id ? (g.category_id - 1) % 7 : idx % 7,
+            getStorageUrl(g.image, g.image_url, defaultGi[idx] ? defaultGi[idx][2] : null),
+            g.title || 'Noor Electric',
           ])
         );
       }
@@ -53,9 +55,36 @@ export default function Gallery({ onSelectGalleryItem }) {
                 style={{ background: `linear-gradient(135deg, ${CC[g[1]]}, #071433)` }}
                 onClick={() => onSelectGalleryItem(g)}
               >
-                {IC[g[1]]}
+                {g[2] ? (
+                  <img
+                    src={g[2]}
+                    alt={g[3] || g[0]}
+                    loading="lazy"
+                    onError={(e) => {
+                      const fallback = defaultGi[i] && defaultGi[i][2];
+                      if (fallback && e.target.src !== fallback) {
+                        e.target.src = fallback;
+                      } else {
+                        e.target.style.display = 'none';
+                        if (e.target.nextElementSibling) {
+                          e.target.nextElementSibling.style.display = 'grid';
+                        }
+                      }
+                    }}
+                  />
+                ) : null}
+                <div
+                  style={{
+                    display: g[2] ? 'none' : 'grid',
+                    placeItems: 'center',
+                    width: '100%',
+                    height: '100%',
+                  }}
+                >
+                  {IC[g[1]]}
+                </div>
                 <span>
-                  {CATS[g[1]][0]} · {g[0]}
+                  {CATS[g[1]] ? CATS[g[1]][0] : g[0]} · {g[3] || g[0]}
                 </span>
               </div>
             ))}

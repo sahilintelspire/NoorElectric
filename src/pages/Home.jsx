@@ -4,7 +4,7 @@ import { IC, CATS, PR } from '../data/electricData';
 import TiltCard from '../components/TiltCard';
 import AnimatedCounter from '../components/AnimatedCounter';
 import CtaSection from '../components/CtaSection';
-import { fetchCategories, fetchProducts } from '../services/api';
+import { fetchCategories, fetchProducts, getStorageUrl } from '../services/api';
 
 export default function Home({ onSelectProduct }) {
   const sliderRef = useRef(null);
@@ -20,11 +20,12 @@ export default function Home({ onSelectProduct }) {
       const liveProds = await fetchProducts({ featured: 1 });
       if (liveProds && liveProds.length > 0) {
         setFeaturedProducts(
-          liveProds.map((p) => [
+          liveProds.map((p, idx) => [
             p.category_id ? (p.category_id - 1) % 7 : 0,
             p.name,
             p.short_description || p.full_description || '',
             Array.isArray(p.features) ? p.features : [],
+            getStorageUrl(p.image, p.image_url, PR[idx] ? PR[idx][4] : null),
           ])
         );
       }
@@ -183,7 +184,36 @@ export default function Home({ onSelectProduct }) {
           <div className="sl" ref={sliderRef}>
             {featuredProducts.map((p, i) => (
               <TiltCard key={i} onClick={() => onSelectProduct(p)}>
-                <div className="pi">{IC[p[0]]}</div>
+                <div className="pi">
+                  {p[4] ? (
+                    <img
+                      src={p[4]}
+                      alt={p[1]}
+                      loading="lazy"
+                      onError={(e) => {
+                        const fallback = PR[i] && PR[i][4];
+                        if (fallback && e.target.src !== fallback) {
+                          e.target.src = fallback;
+                        } else {
+                          e.target.style.display = 'none';
+                          if (e.target.nextElementSibling) {
+                            e.target.nextElementSibling.style.display = 'grid';
+                          }
+                        }
+                      }}
+                    />
+                  ) : null}
+                  <div
+                    style={{
+                      display: p[4] ? 'none' : 'grid',
+                      placeItems: 'center',
+                      width: '100%',
+                      height: '100%',
+                    }}
+                  >
+                    {IC[p[0]]}
+                  </div>
+                </div>
                 <div className="pb">
                   <span className="tag">{categories[p[0]] ? categories[p[0]][0] : 'Product'}</span>
                   <h3>{p[1]}</h3>

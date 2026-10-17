@@ -78,31 +78,41 @@ export const CATS = [
 ];
 
 export const PR = [
-  [0, 'House Wiring Copper Wire', 'Flame-retardant copper wire for safe home and shop wiring. Available in many sizes and colours.', ['Pure copper conductor', 'Flame retardant PVC', 'Red, yellow, blue, black, green']],
-  [0, 'Flexible Multi-Core Cable', 'Soft, bendable cable for appliances, pumps and extension wiring.', ['Easy to bend and route', 'Multi-strand copper', 'Suitable for appliances']],
-  [0, 'Coaxial and Network Cable', 'Cables for TV, CCTV and internet connections at home or office.', ['Clear signal', 'Good shielding', 'Different lengths']],
-  [1, 'Modular Switch Set', 'Smooth, modern switches in a range of plate designs for living rooms and bedrooms.', ['Easy modular fitting', 'Modern finish', '1, 2, 3, 4 module plates']],
-  [1, '6A/16A Power Socket', 'Strong sockets for fans, TVs, geysers and heavy appliances.', ['Shuttered safety', 'Heat resistant body', 'Multi-pin support']],
-  [1, 'Bell Push and Dimmer', 'Add comfort with fan regulators, dimmers and door bell switches.', ['Smooth regulation', 'Quiet operation', 'Fits standard boxes']],
-  [2, 'LED Bulb', 'Energy saving LED bulbs in warm and cool white for every room.', ['Low power use', 'Long life', 'B22 and E27 base']],
-  [2, 'LED Panel Light', 'Slim ceiling panels, even light for offices, shops and homes.', ['Round and square', 'Glare-free light', 'Easy false ceiling fitting']],
-  [2, 'Tube Light and Batten', 'Bright long-lasting batten lights for shops, garages and offices.', ['Bright output', 'Instant start', '4 ft and 2 ft']],
-  [3, 'MCB (Single and Double Pole)', 'Miniature circuit breakers that protect wiring from overload and short circuit.', ['6A to 63A ratings', 'Quick trip response', 'DIN rail mount']],
-  [3, 'Distribution Board (DB)', 'Neat boards that hold MCBs and keep home or shop wiring organised.', ['4, 6, 8, 12 way', 'Strong metal body', 'Easy wire access']],
-  [3, 'RCCB / Safety Cut-off', 'Shock protection device for kitchens, bathrooms and workshops.', ['Earth leakage safety', 'Fast response', 'Test button']],
-  [4, 'Ceiling Fan', 'Quiet, powerful ceiling fans in several sizes and finishes.', ['Silent motor', 'High air delivery', '1200 mm and 1400 mm']],
-  [4, 'Exhaust Fan', 'Ventilation fans for kitchens, bathrooms and shops.', ['Removes smell and heat', 'Dust-proof body', 'Different blade sizes']],
-  [5, 'Plugs, Holders and Connectors', 'All the small items electricians need every day.', ['3-pin plugs', 'Lamp holders', 'Terminal connectors']],
-  [6, 'Home Wiring Solution', 'Plan and supply for full home wiring: wires, switches, MCBs and lights together.', ['Complete material list', 'Quality products', 'Guidance from our team']],
-  [6, 'Office and Shop Setup', 'Lighting and power setup for offices and shops, with good light and safe wiring.', ['Panel and tube lighting', 'Safe DB setup', 'Ready-to-use plan']]
+  [0, 'House Wiring Copper Wire', 'Flame-retardant copper wire for safe home and shop wiring. Available in many sizes and colours.', ['Pure copper conductor', 'Flame retardant PVC', 'Red, yellow, blue, black, green'], 'https://images.unsplash.com/photo-1544716278-ca5e3f4abd8c?w=600&auto=format&fit=crop&q=80'],
+  [0, 'Flexible Multi-Core Cable', 'Soft, bendable cable for appliances, pumps and extension wiring.', ['Easy to bend and route', 'Multi-strand copper', 'Suitable for appliances'], 'https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=600&auto=format&fit=crop&q=80'],
+  [0, 'Coaxial and Network Cable', 'Cables for TV, CCTV and internet connections at home or office.', ['Clear signal', 'Good shielding', 'Different lengths'], 'https://images.unsplash.com/photo-1544716278-e53995f32eb0?w=600&auto=format&fit=crop&q=80'],
+  [1, 'Modular Switch Set', 'Smooth, modern switches in a range of plate designs for living rooms and bedrooms.', ['Easy modular fitting', 'Modern finish', '1, 2, 3, 4 module plates'], 'https://images.unsplash.com/photo-1595475207225-428b62bda831?w=600&auto=format&fit=crop&q=80'],
+  [1, '6A/16A Power Socket', 'Strong sockets for fans, TVs, geysers and heavy appliances.', ['Shuttered safety', 'Heat resistant body', 'Multi-pin support'], 'https://images.unsplash.com/photo-1592833159155-c62df1b65634?w=600&auto=format&fit=crop&q=80'],
+  [1, 'Bell Push and Dimmer', 'Add comfort with fan regulators, dimmers and door bell switches.', ['Smooth regulation', 'Quiet operation', 'Fits standard boxes'], 'https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=600&auto=format&fit=crop&q=80'],
+  [2, 'LED Bulb', 'Energy saving LED bulbs in warm and cool white for every room.', ['Low power use', 'Long life', 'B22 and E27 base'], 'https://images.unsplash.com/photo-1507499739999-097706ad8914?w=600&auto=format&fit=crop&q=80'],
+  [2, 'LED Panel Light', 'Slim ceiling panels, even light for offices, shops and homes.', ['Round and square', 'Glare-free light', 'Easy false ceiling fitting'], 'https://images.unsplash.com/photo-1513506003901-1e6a229e2d15?w=600&auto=format&fit=crop&q=80'],
+  [2, 'Tube Light and Batten', 'Bright long-lasting batten lights for shops, garages and offices.', ['Bright output', 'Instant start', '4 ft and 2 ft'], 'https://images.unsplash.com/photo-1565814636199-ae8133055c1c?w=600&auto=format&fit=crop&q=80'],
+  [3, 'MCB (Single and Double Pole)', 'Miniature circuit breakers that protect wiring from overload and short circuit.', ['6A to 63A ratings', 'Quick trip response', 'DIN rail mount'], 'https://images.unsplash.com/photo-1621905251918-48416bd8575a?w=600&auto=format&fit=crop&q=80'],
+  [3, 'Distribution Board (DB)', 'Neat boards that hold MCBs and keep home or shop wiring organised.', ['4, 6, 8, 12 way', 'Strong metal body', 'Easy wire access'], 'https://images.unsplash.com/photo-1581092160607-ee22621dd758?w=600&auto=format&fit=crop&q=80'],
+  [3, 'RCCB / Safety Cut-off', 'Shock protection device for kitchens, bathrooms and workshops.', ['Earth leakage safety', 'Fast response', 'Test button'], 'https://images.unsplash.com/photo-1621905252507-b35492cc74b4?w=600&auto=format&fit=crop&q=80'],
+  [4, 'Ceiling Fan', 'Quiet, powerful ceiling fans in several sizes and finishes.', ['Silent motor', 'High air delivery', '1200 mm and 1400 mm'], 'https://images.unsplash.com/photo-1585338107529-13afc5f02586?w=600&auto=format&fit=crop&q=80'],
+  [4, 'Exhaust Fan', 'Ventilation fans for kitchens, bathrooms and shops.', ['Removes smell and heat', 'Dust-proof body', 'Different blade sizes'], 'https://images.unsplash.com/photo-1517524008697-84bbe3c3fd98?w=600&auto=format&fit=crop&q=80'],
+  [5, 'Plugs, Holders and Connectors', 'All the small items electricians need every day.', ['3-pin plugs', 'Lamp holders', 'Terminal connectors'], 'https://images.unsplash.com/photo-1581092335397-9583fe92d232?w=600&auto=format&fit=crop&q=80'],
+  [6, 'Home Wiring Solution', 'Plan and supply for full home wiring: wires, switches, MCBs and lights together.', ['Complete material list', 'Quality products', 'Guidance from our team'], 'https://images.unsplash.com/photo-1513694203232-719a280e022f?w=600&auto=format&fit=crop&q=80'],
+  [6, 'Office and Shop Setup', 'Lighting and power setup for offices and shops, with good light and safe wiring.', ['Panel and tube lighting', 'Safe DB setup', 'Ready-to-use plan'], 'https://images.unsplash.com/photo-1497366216548-37526070297c?w=600&auto=format&fit=crop&q=80']
 ];
 
 export const CC = ['#1A3F96', '#0B2559', '#B8860B', '#2F6BFF', '#2A4F9F', '#0F2150', '#1A3F96'];
 
-export const GI = Array.from({ length: 12 }, (_, i) => [
-  ['Our Shop', 'Products', 'Installations'][i % 3],
-  i % 7
-]);
+export const GI = [
+  ['Our Shop', 0, 'https://images.unsplash.com/photo-1513694203232-719a280e022f?w=600&auto=format&fit=crop&q=80', 'Modern Shop Interior'],
+  ['Products', 0, 'https://images.unsplash.com/photo-1544716278-ca5e3f4abd8c?w=600&auto=format&fit=crop&q=80', 'Wires & Cables Display'],
+  ['Installations', 3, 'https://images.unsplash.com/photo-1621905251918-48416bd8575a?w=600&auto=format&fit=crop&q=80', 'Distribution Board Setup'],
+  ['Our Shop', 6, 'https://images.unsplash.com/photo-1497366216548-37526070297c?w=600&auto=format&fit=crop&q=80', 'Noor Electric Showroom'],
+  ['Products', 1, 'https://images.unsplash.com/photo-1595475207225-428b62bda831?w=600&auto=format&fit=crop&q=80', 'Modular Switches & Plates'],
+  ['Installations', 2, 'https://images.unsplash.com/photo-1513506003901-1e6a229e2d15?w=600&auto=format&fit=crop&q=80', 'LED False Ceiling Lighting'],
+  ['Our Shop', 5, 'https://images.unsplash.com/photo-1581092160607-ee22621dd758?w=600&auto=format&fit=crop&q=80', 'Electrical Materials Counter'],
+  ['Products', 2, 'https://images.unsplash.com/photo-1507499739999-097706ad8914?w=600&auto=format&fit=crop&q=80', 'Energy Saving LED Bulbs'],
+  ['Installations', 4, 'https://images.unsplash.com/photo-1585338107529-13afc5f02586?w=600&auto=format&fit=crop&q=80', 'High Speed Ceiling Fan Fitment'],
+  ['Our Shop', 1, 'https://images.unsplash.com/photo-1592833159155-c62df1b65634?w=600&auto=format&fit=crop&q=80', 'Heavy Power Sockets Section'],
+  ['Products', 5, 'https://images.unsplash.com/photo-1581092335397-9583fe92d232?w=600&auto=format&fit=crop&q=80', 'Plugs, Holders & Accessories'],
+  ['Installations', 2, 'https://images.unsplash.com/photo-1565814636199-ae8133055c1c?w=600&auto=format&fit=crop&q=80', 'Commercial Batten Lights']
+];
 
 export const TEAM = [
   ['Shafi Ipli', '7698195687', '917698195687'],

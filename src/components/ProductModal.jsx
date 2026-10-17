@@ -14,7 +14,7 @@ export default function ProductModal({ product, onClose }) {
 
   if (!product) return null;
 
-  const [catIndex, title, desc, features] = product;
+  const [catIndex, title, desc, features, image] = product;
 
   return (
     <div
@@ -25,12 +25,36 @@ export default function ProductModal({ product, onClose }) {
       }}
     >
       <div className="mc">
-        <div className="pi">{IC[catIndex]}</div>
+        <div className="pi">
+          {image ? (
+            <img
+              src={image}
+              alt={title}
+              style={{ width: '100%', height: '100%', objectFit: 'cover' }}
+              onError={(e) => {
+                e.target.style.display = 'none';
+                if (e.target.nextElementSibling) {
+                  e.target.nextElementSibling.style.display = 'grid';
+                }
+              }}
+            />
+          ) : null}
+          <div
+            style={{
+              display: image ? 'none' : 'grid',
+              placeItems: 'center',
+              width: '100%',
+              height: '100%',
+            }}
+          >
+            {IC[catIndex]}
+          </div>
+        </div>
         <div className="mt">
           <button className="x" id="mx" onClick={onClose} aria-label="Close">
             ✕
           </button>
-          <span className="tag">{CATS[catIndex][0]}</span>
+          <span className="tag">{CATS[catIndex] ? CATS[catIndex][0] : 'Product'}</span>
           <h2 style={{ margin: '10px 0' }}>{title}</h2>
           <p style={{ color: 'var(--mute)' }}>{desc}</p>
           <ul>

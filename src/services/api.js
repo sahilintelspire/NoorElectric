@@ -63,3 +63,12 @@ export async function submitEnquiry(data) {
     return null;
   }
 }
+
+export function getStorageUrl(image, imageUrl, fallback = null) {
+  if (imageUrl) return imageUrl;
+  if (!image) return fallback;
+  if (image.startsWith('http://') || image.startsWith('https://')) return image;
+  const clean = image.replace(/^\/?(storage\/)?/, '');
+  const baseUrl = API_BASE_URL.replace(/\/api\/?$/, '');
+  return `${baseUrl}/storage/${clean}`;
+}
