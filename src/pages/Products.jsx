@@ -3,7 +3,8 @@ import { useSearchParams } from 'react-router-dom';
 import PageBanner from '../components/PageBanner';
 import CtaSection from '../components/CtaSection';
 import TiltCard from '../components/TiltCard';
-import { IC, CATS, PR } from '../data/electricData';
+import { IC, CATS as defaultCats, PR as defaultPr } from '../data/electricData';
+import { fetchCategories, fetchProducts } from '../services/api';
 
 export default function Products({ onSelectProduct }) {
   const [searchParams, setSearchParams] = useSearchParams();
@@ -11,6 +12,29 @@ export default function Products({ onSelectProduct }) {
 
   const [cur, setCur] = useState(catParam !== null ? catParam : 'all');
   const [query, setQuery] = useState('');
+  const [categories, setCategories] = useState(defaultCats);
+  const [productsList, setProductsList] = useState(defaultPr);
+
+  useEffect(() => {
+    async function loadLiveData() {
+      const liveCats = await fetchCategories();
+      if (liveCats && liveCats.length > 0) {
+        setCategories(liveCats.map((c) => [c.name, c.subtitle || '']));
+      }
+      const liveProds = await fetchProducts();
+      if (liveProds && liveProds.length > 0) {
+        setProductsList(
+          liveProds.map((p) => [
+            p.category_id ? (p.category_id - 1) % 7 : 0,
+            p.name,
+            p.short_description || p.full_description || '',
+            Array.isArray(p.features) ? p.features : [],
+          ])
+        );
+      }
+    }
+    loadLiveData();
+  }, []);
 
   useEffect(() => {
     if (catParam !== null) {
@@ -27,11 +51,13 @@ export default function Products({ onSelectProduct }) {
     }
   };
 
-  const filteredProducts = PR.map((p, i) => ({ p, i })).filter(({ p }) => {
-    const matchesCategory = cur === 'all' || p[0] === Number(cur);
-    const matchesSearch = (p[1] + ' ' + p[2]).toLowerCase().includes(query.toLowerCase());
-    return matchesCategory && matchesSearch;
-  });
+  const filteredProducts = productsList
+    .map((p, i) => ({ p, i }))
+    .filter(({ p }) => {
+      const matchesCategory = cur === 'all' || p[0] === Number(cur);
+      const matchesSearch = (p[1] + ' ' + p[2]).toLowerCase().includes(query.toLowerCase());
+      return matchesCategory && matchesSearch;
+    });
 
   return (
     <>
@@ -58,7 +84,7 @@ export default function Products({ onSelectProduct }) {
             >
               All
             </button>
-            {CATS.map((c, i) => (
+            {categories.map((c, i) => (
               <button
                 key={i}
                 className={`chip ${String(cur) === String(i) ? 'on' : ''}`}

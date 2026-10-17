@@ -1,12 +1,36 @@
-import React, { useRef } from 'react';
+import React, { useRef, useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { IC, CATS, PR } from '../data/electricData';
 import TiltCard from '../components/TiltCard';
 import AnimatedCounter from '../components/AnimatedCounter';
 import CtaSection from '../components/CtaSection';
+import { fetchCategories, fetchProducts } from '../services/api';
 
 export default function Home({ onSelectProduct }) {
   const sliderRef = useRef(null);
+  const [categories, setCategories] = useState(CATS);
+  const [featuredProducts, setFeaturedProducts] = useState(PR.slice(0, 8));
+
+  useEffect(() => {
+    async function loadLiveData() {
+      const liveCats = await fetchCategories();
+      if (liveCats && liveCats.length > 0) {
+        setCategories(liveCats.map((c) => [c.name, c.subtitle || '']));
+      }
+      const liveProds = await fetchProducts({ featured: 1 });
+      if (liveProds && liveProds.length > 0) {
+        setFeaturedProducts(
+          liveProds.map((p) => [
+            p.category_id ? (p.category_id - 1) % 7 : 0,
+            p.name,
+            p.short_description || p.full_description || '',
+            Array.isArray(p.features) ? p.features : [],
+          ])
+        );
+      }
+    }
+    loadLiveData();
+  }, []);
 
   const scrollSlider = (offset) => {
     if (sliderRef.current) {
@@ -88,7 +112,7 @@ export default function Home({ onSelectProduct }) {
         <div>
           {Array.from({ length: 4 }).map((_, repeatIndex) => (
             <React.Fragment key={repeatIndex}>
-              {CATS.map((c, i) => (
+              {categories.map((c, i) => (
                 <span key={`${repeatIndex}-${i}`}>⚡ {c[0]}</span>
               ))}
             </React.Fragment>
@@ -104,9 +128,9 @@ export default function Home({ onSelectProduct }) {
             <p>Tap any category to see its products.</p>
           </div>
           <div className="g g4">
-            {CATS.map((c, i) => (
+            {categories.map((c, i) => (
               <Link key={i} to={`/products?category=${i}`} className="cat rv in">
-                <div className="ic">{IC[i]}</div>
+                <div className="ic">{IC[i % 7]}</div>
                 {c[0]}
                 <small>{c[1]}</small>
               </Link>
@@ -133,11 +157,11 @@ export default function Home({ onSelectProduct }) {
 
           <div className="g g3 st rv in" style={{ borderRadius: '24px', padding: '30px 10px' }}>
             <div>
-              <AnimatedCounter target={7} />
+              <AnimatedCounter target={categories.length || 7} />
               Categories
             </div>
             <div>
-              <AnimatedCounter target={PR.length} />
+              <AnimatedCounter target={featuredProducts.length || 17} />
               Products listed
             </div>
             <div>
@@ -157,11 +181,11 @@ export default function Home({ onSelectProduct }) {
           </div>
 
           <div className="sl" ref={sliderRef}>
-            {PR.slice(0, 8).map((p, i) => (
+            {featuredProducts.map((p, i) => (
               <TiltCard key={i} onClick={() => onSelectProduct(p)}>
                 <div className="pi">{IC[p[0]]}</div>
                 <div className="pb">
-                  <span className="tag">{CATS[p[0]][0]}</span>
+                  <span className="tag">{categories[p[0]] ? categories[p[0]][0] : 'Product'}</span>
                   <h3>{p[1]}</h3>
                   <p>{p[2].slice(0, 70)}…</p>
                   <u>View details</u>

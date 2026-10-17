@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import PageBanner from '../components/PageBanner';
 import { PhoneIcon, InstagramIcon, CATS, wl } from '../data/electricData';
+import { submitEnquiry } from '../services/api';
 
 export default function Contact() {
   const [name, setName] = useState('');
@@ -10,6 +11,12 @@ export default function Contact() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    submitEnquiry({
+      name,
+      phone,
+      category,
+      message,
+    });
     const text = `Hello Noor Electric, I am ${name} (${phone}). I need: ${category}. ${message}`;
     window.open(wl(text), '_blank');
   };

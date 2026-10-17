@@ -1,12 +1,29 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import PageBanner from '../components/PageBanner';
 import CtaSection from '../components/CtaSection';
-import { IC, CATS, CC, GI } from '../data/electricData';
+import { IC, CATS, CC, GI as defaultGi } from '../data/electricData';
+import { fetchGallery } from '../services/api';
 
 export default function Gallery({ onSelectGalleryItem }) {
   const [gc, setGc] = useState('All');
+  const [galleryItems, setGalleryItems] = useState(defaultGi);
 
-  const filteredItems = GI.filter((g) => gc === 'All' || g[0] === gc);
+  useEffect(() => {
+    async function loadLiveGallery() {
+      const liveItems = await fetchGallery();
+      if (liveItems && liveItems.length > 0) {
+        setGalleryItems(
+          liveItems.map((g, idx) => [
+            g.category_type || 'Our Shop',
+            g.category_id ? (g.category_id - 1) % 7 : idx % 7,
+          ])
+        );
+      }
+    }
+    loadLiveGallery();
+  }, []);
+
+  const filteredItems = galleryItems.filter((g) => gc === 'All' || g[0] === gc);
 
   return (
     <>
